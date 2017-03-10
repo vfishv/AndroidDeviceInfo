@@ -164,6 +164,10 @@ public class MainActivity extends FragmentActivity {
         MobileInfor.put("isMIUI", "" + MIUIUtils.isMIUI());
 
 
+        MobileInfor.put("openGL ES version", Utility.openGLVersion(this));
+
+
+
         WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = wifi.getConnectionInfo();
         WIFI_MAC_ADDRESS = info.getMacAddress();

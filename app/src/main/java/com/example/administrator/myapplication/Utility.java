@@ -48,6 +48,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -3600,7 +3601,41 @@ public final class Utility
 		return Looper.getMainLooper() == Looper.myLooper();
 	}
 
+	public static String openGLVersion(Context context){
 
+		/*
+		https://developer.android.com/guide/topics/graphics/opengl.html
+
+OpenGL ES 1.0 and 1.1 - This API specification is supported by Android 1.0 and higher.
+OpenGL ES 2.0 - This API specification is supported by Android 2.2 (API level 8) and higher.
+OpenGL ES 3.0 - This API specification is supported by Android 4.3 (API level 18) and higher.
+OpenGL ES 3.1 - This API specification is supported by Android 5.0 (API level 21) and higher.
+
+		<uses-feature android:glEsVersion="0x00020000" android:required="true" /> OpenGL ES 2.0
+		<uses-feature android:glEsVersion="0x00030002" android:required="true" /> OpenGL ES 3.2
+		*/
+
+		final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		final ConfigurationInfo configurationInfo = activityManager.getDeviceConfigurationInfo();
+		boolean supportsEs2 = configurationInfo.reqGlEsVersion >= 0x20000;
+		boolean supportsEs32 = configurationInfo.reqGlEsVersion >= 0x30002;
+
+		Log.i(TAG, "openGLVersion: " + configurationInfo.reqGlEsVersion);
+
+
+		String version = null;
+
+		if (configurationInfo.reqGlEsVersion == ConfigurationInfo.GL_ES_VERSION_UNDEFINED) {
+			version = "Unkown";
+		}
+		if(supportsEs2){
+			version = "2.0";
+		}
+		if(supportsEs32){
+			version = "3.2";
+		}
+		return version;
+	}
 	
 
 
