@@ -3601,7 +3601,7 @@ public final class Utility
 		return Looper.getMainLooper() == Looper.myLooper();
 	}
 
-	public static String openGLVersion(Context context){
+	public static String openGLVersion(Context context) {
 
 		/*
 		https://developer.android.com/guide/topics/graphics/opengl.html
@@ -3628,10 +3628,10 @@ OpenGL ES 3.1 - This API specification is supported by Android 5.0 (API level 21
 		if (configurationInfo.reqGlEsVersion == ConfigurationInfo.GL_ES_VERSION_UNDEFINED) {
 			version = "Unkown";
 		}
-		if(supportsEs2){
+		if (supportsEs2) {
 			version = "2.0";
 		}
-		if(supportsEs32){
+		if (supportsEs32) {
 			version = "3.2";
 		}
 		return version;
